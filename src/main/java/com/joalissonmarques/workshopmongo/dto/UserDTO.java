@@ -6,7 +6,7 @@ import com.joalissonmarques.workshopmongo.domain.User;
 
 public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	//Usado para melhorar o trafego, ex: user tem mais de 30 atritubos, mas quero exibir somente alguns, usamos o DTO para esse retorno.
 	private String id;
 	private String name;
 	private String email;
