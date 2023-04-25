@@ -29,6 +29,11 @@ public class UserService {
 	public User insert(User obj) {
 		return repo.insert(obj);
 	}
+	public void delete(String id) {
+		//fazemos ele fazer a busca priemiro, se ele não encontrar, já lança o erro
+		findById(id);
+		repo.deleteById(id);
+	}
 	
 	public User fromDTO(UserDTO objDTO) {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
