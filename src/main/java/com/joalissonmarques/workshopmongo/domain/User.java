@@ -1,9 +1,12 @@
 package com.joalissonmarques.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //Podemos também colocar apenas Document e o spring mapea conforme o nome da class
@@ -15,6 +18,10 @@ public class User implements Serializable{
 	private String id;
 	private String name;
 	private String email;
+	
+	//Lazy estamos referenciando uma coleção, não queremos carregar os posts quando puxarmos/buscarmos o user para não sobrecarregar
+	@DBRef(lazy = true)
+	private List<Post> posts = new ArrayList<>();
 
 	public User() {
 
@@ -50,6 +57,14 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 
 	@Override
 	public int hashCode() {
@@ -67,5 +82,4 @@ public class User implements Serializable{
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }
